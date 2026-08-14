@@ -1,6 +1,7 @@
 services:
   chamados:
     build: .
+    image: chamados:latest
     container_name: chamados
     ports:
       - "8000:80"
@@ -28,11 +29,27 @@ services:
     networks:
       - chamados-network
 
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: chamados_phpmyadmin
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: chamados
+    networks:
+      - chamados-network
+
   selenium:
     image: selenium/standalone-chrome
     container_name: chamados_selenium
     ports:
-      - "7900:7900" # VNC (pra ver o browser rodando)
+      - "7900:7900"
     networks:
       - chamados-network
     shm_size: 2gb
@@ -54,3 +71,4 @@ networks:
 
 volumes:
   mariadb_data:
+
