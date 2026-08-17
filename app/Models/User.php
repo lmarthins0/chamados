@@ -13,6 +13,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     use \Uspdev\SenhaunicaSocialite\Traits\HasSenhaunica;
 
+    protected $guard_name = 'senhaunica';
+
     # desativado por enquanto por conta de conflito
     #use \Spatie\Permission\Traits\HasRoles;
 
