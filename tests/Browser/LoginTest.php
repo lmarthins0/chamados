@@ -17,9 +17,11 @@ class LoginTest extends DuskTestCase
             $browser->visit('/')
                 ->clickLink('Entrar')
                 ->waitFor('#loginUsuario') # Importante: Espera a página de login carregar
-                ->typeSlowly('loginUsuario', '1111')
+                ->type('#callback', 'http://rede/callback')
+                ->type('#loginUsuario', '1111')
                 ->press('Login')
-                ->waitFor('.login_logout_link', 20);
+                ->waitFor('.login_logout_link')
+                ->assertSee('Sair');
         });
     }
 }
