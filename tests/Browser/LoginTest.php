@@ -20,7 +20,7 @@ class LoginTest extends DuskTestCase
                 ->type('#callback', 'http://chamados/callback')
                 ->type('#loginUsuario', '1111')
                 ->press('Login')
-                ->waitFor('.login_logout_link')
+                ->waitForText('Sair')
                 ->assertSee('Sair');
         });
     }
